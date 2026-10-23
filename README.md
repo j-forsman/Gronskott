@@ -6,6 +6,8 @@ A lightweight macOS screenshot annotation tool inspired by [Greenshot](https://g
 
 The user interface is in Swedish.
 
+Grönskott is an independent project and is not affiliated with or endorsed by the Greenshot team.
+
 ![The Grönskott editor with arrows, highlights, step counters and a pixelated area](docs/screenshot.png)
 
 ## Features
@@ -24,6 +26,7 @@ The user interface is in Swedish.
 - Image effects: grayscale, invert, border, drop shadow, torn edge
 - Undo/redo
 - Export as PNG or JPEG, copy to clipboard, or copy and close in one step
+- Share via the macOS share menu (Mail, Messages, AirDrop, …)
 - Quick save (⌘S) to a folder you choose once, with timestamped file names
 
 ## Requirements

@@ -181,6 +181,13 @@ struct EditorView: View {
                   ? "Spara ⌘S — välj en sparmapp första gången"
                   : "Spara i \((saveFolderPath as NSString).abbreviatingWithTildeInPath) ⌘S")
 
+            ShareLink(item: SharedScreenshot(image: image, elements: elements),
+                      preview: SharePreview("Skärmdump", image: Image(nsImage: image))) {
+                Label("Dela", systemImage: "square.and.arrow.up")
+            }
+            .buttonStyle(.bordered)
+            .help("Dela via Mail, Meddelanden, AirDrop …")
+
             Divider().frame(height: 20)
             colorPalette
             Divider().frame(height: 20)
@@ -1242,6 +1249,25 @@ struct EditorView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 5)
+    }
+}
+
+// MARK: - Share
+
+// Rendered lazily, only when the user actually picks a share target.
+struct SharedScreenshot: Transferable {
+    let image: NSImage
+    let elements: [DrawingElement]
+
+    static var transferRepresentation: some TransferRepresentation {
+        DataRepresentation(exportedContentType: .png) { shot in
+            let data = await MainActor.run {
+                ImageExporter.render(image: shot.image, elements: shot.elements)?.pngData()
+            }
+            guard let data else { throw CocoaError(.fileWriteUnknown) }
+            return data
+        }
+        .suggestedFileName("Skärmdump.png")
     }
 }
 
