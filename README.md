@@ -2,7 +2,7 @@
 
 # Grönskott
 
-A lightweight macOS screenshot annotation tool inspired by [Greenshot](https://getgreenshot.org) — the name is Swedish for "green shot" (and *skott* also means a fresh green shoot). Lives in the menu bar and opens an editor immediately after capture.
+A lightweight macOS screenshot annotation tool inspired by [Greenshot](https://getgreenshot.org). Lives in the menu bar and opens an editor immediately after capture.
 
 The user interface is in Swedish.
 
