@@ -8,6 +8,7 @@ The user interface is in Swedish.
 
 Grönskott is an independent project and is not affiliated with or endorsed by the Greenshot team.
 
+![The Grönskott editor with arrows, highlights, step counters and a pixelated area](docs/screenshot.png)
 
 ## Features
 
