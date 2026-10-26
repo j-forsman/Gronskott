@@ -118,6 +118,10 @@ final class CaptureManager {
             return false
         }
         isCaptureInProgress = true
+        // Remember where the user came from, unless that was one of our own editor windows.
+        if let front = NSWorkspace.shared.frontmostApplication, front != .current {
+            windowController.returnTo = front
+        }
         return true
     }
 

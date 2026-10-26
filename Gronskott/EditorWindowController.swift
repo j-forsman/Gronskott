@@ -3,6 +3,8 @@ import SwiftUI
 
 final class EditorWindowController: NSObject, NSWindowDelegate {
     private var windows: [NSWindow] = []
+    /// The app that was frontmost before the capture; reactivated when the last editor closes.
+    var returnTo: NSRunningApplication?
 
     func showEditor(with image: NSImage) {
         let window = createWindow(fitting: image.size)
@@ -23,12 +25,18 @@ final class EditorWindowController: NSObject, NSWindowDelegate {
         windows.removeAll { $0 === window }
         if windows.isEmpty {
             // Dropping to .accessory while active lets macOS pick an arbitrary app
-            // to activate, so the app you came from (e.g. the paste target) can
-            // end up buried. hide() hands focus back to the previously active app.
-            NSApp.hide(nil)
-            NSApp.setActivationPolicy(.accessory)
-            // Clear the hidden flag so later overlays/editor windows can show.
-            DispatchQueue.main.async { NSApp.unhideWithoutActivation() }
+            // to activate, burying the app you came from (e.g. the paste target).
+            // Hand focus back to it explicitly before giving up activation.
+            if let app = returnTo, !app.isTerminated {
+                app.activate()
+                NSApp.setActivationPolicy(.accessory)
+            } else {
+                NSApp.hide(nil)
+                NSApp.setActivationPolicy(.accessory)
+                // Clear the hidden flag so later overlays/editor windows can show.
+                DispatchQueue.main.async { NSApp.unhideWithoutActivation() }
+            }
+            returnTo = nil
         }
     }
 
