@@ -10,6 +10,6 @@ Please include what you found, how to reproduce it, and which macOS version you 
 
 ## Scope
 
-Grönskott makes no network requests and stores nothing except screenshots you save yourself, so the most relevant issues are things like reading or writing files it shouldn't, or capturing more of the screen than the user selected.
+Grönskott makes no network requests and stores nothing except screenshots you save yourself and two preferences (save folder and export format), so the most relevant issues are things like reading or writing files it shouldn't, or capturing more of the screen than the user selected.
 
 Only the latest version on the `main` branch is supported.
